@@ -21,7 +21,7 @@ function WeatherCard({ weatherData, error, onRefresh }) {
   return (
     <div className="weather-card">
       <h2>{weatherData.city}</h2>
-      <p>Temperature: {weatherData.temp}°C</p>
+      <p>Temperature: {weatherData.temp} {weatherData.unit}</p>
       <p>Condition: {weatherData.condition}</p>
       <button onClick={onRefresh}>Refresh</button>
     </div>
