@@ -1,0 +1,49 @@
+.weather-card {
+  background: linear-gradient(to bottom, #ffffff, #e6f7ff); 
+  border-radius: 15px;
+  padding: 25px;
+  margin: 20px auto;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  font-family: 'Arial', sans-serif;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.weather-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.weather-card h2 {
+  margin: 0 0 10px 0;
+  color: #4a90e2;
+  font-size: 1.6rem;
+}
+
+.weather-card p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+.weather-card button {
+  margin-top: 15px;
+  padding: 10px 18px;
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.weather-card button:hover {
+  background-color: #357abd;
+  transform: translateY(-2px);
+}
+
+.weather-card.error {
+  background-color: #ffe6e6; 
+  color: #a33;
+}
