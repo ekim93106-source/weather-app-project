@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import './SearchBar.css';
 
 function SearchBar({ onSearch }) {
@@ -19,10 +19,11 @@ function SearchBar({ onSearch }) {
                 placeholder="Enter city name"
                 value={city}
                 onChange={(e) => setCity(e.target.value)}
-                />
+            />
             <button type="submit">Search</button>
-            </form>
+        </form>
     );
 }
 
 export default SearchBar;
+

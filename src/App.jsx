@@ -1,27 +1,50 @@
 import { useState } from "react";
+import Header from "./components/Header.jsx";
+import SearchBar from "./components/SearchBar.jsx";
+import WeatherCard from "./components/WeatherCard.jsx";
 
 function App() {
-  const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+  const [error, setError] = useState("");
 
-  const handleSearch = () => {
-    setMessage(`You searched for: ${city}`);
+  // Called when the search button is pressed in SearchBar
+  const handleSearch = (searchedCity) => {
+    setMessage(`You searched for: ${searchedCity}`);
+
+    // Dummy data for now; real API will replace this later
+    setWeatherData({
+      city: searchedCity,
+      temp: "--",
+      condition: "Loading..."
+    });
+
+    setError(""); // clear previous error
+  };
+
+  // Dummy refresh function
+  const handleRefresh = () => {
+    setMessage("Refreshing...");
+    // You can call API here later
   };
 
   return (
     <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Weather App</h1>
+      {/* Header */}
+      <Header />
 
-      <input
-        type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
+      {/* Search input & button from your SearchBar.jsx */}
+      <SearchBar onSearch={handleSearch} />
 
-      <button onClick={handleSearch}>Search</button>
-
+      {/* Display a search message */}
       {message && <p>{message}</p>}
+
+      {/* Weather card */}
+      <WeatherCard
+        weatherData={weatherData}
+        error={error}
+        onRefresh={handleRefresh}
+      />
     </div>
   );
 }
