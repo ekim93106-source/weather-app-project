@@ -1,29 +1,31 @@
-import { useState } from "react";
+const API_KEY = "YOUR_API_KEY_HERE";
+const [weatherData, setWeatherData] = useState(null);
+const [error, setError] = useState("");
+const [loading, setLoading] = useState(false);
+const handleSearch = async (searchedCity) => {
+  setLoading(true);
+  setError("");
 
-function App() {
-  const [city, setCity] = useState("");
-  const [message, setMessage] = useState("");
+  try {
+    const response = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=${searchedCity}&units=metric&appid=${API_KEY}`
+    );
 
-  const handleSearch = () => {
-    setMessage(`You searched for: ${city}`);
-  };
+    if (!response.ok) {
+      throw new Error("City not found");
+    }
 
-  return (
-    <div style={{ padding: "20px", fontFamily: "Arial" }}>
-      <h1>Weather App</h1>
+    const data = await response.json();
 
-      <input
-        type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-
-      <button onClick={handleSearch}>Search</button>
-
-      {message && <p>{message}</p>}
-    </div>
-  );
-}
-
-export default App;
+    setWeatherData({
+      city: data.name,
+      temp: data.main.temp,
+      condition: data.weather[0].description,
+    });
+  } catch (err) {
+    setError(err.message);
+    setWeatherData(null);
+  } finally {
+    setLoading(false);
+  }
+};
